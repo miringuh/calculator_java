@@ -13,7 +13,8 @@ public class jpanel {
     int width;
     int height;
     int row=0;
-    int col=0;
+    int col=100;
+
     String name;
     public jpanel(int x,int y,int width,int height,String name){
         this.xn=x;
@@ -26,7 +27,6 @@ public class jpanel {
         jp=new JPanel();
         jp.setBounds(this.xn,this.yn,this.width,this.height);
         jp.setName(this.name);
-
         jp.setLayout(null);
 
         for (int i = 0; i < 4; i++) {
@@ -36,7 +36,7 @@ public class jpanel {
             jp.add(button);
         }
         row=0;
-        col=30;
+        col=130;
         for (int i = 4; i < 8; i++) {
             jbutton butt1=new jbutton(row,col,60,30,comp.get(i).getName());
             JButton button1 = butt1.getButton(comp.get(i).getName());
@@ -44,7 +44,7 @@ public class jpanel {
             jp.add(button1);
         }
         row=0;
-        col=60;
+        col=160;
         for (int i = 8; i < 12; i++) {
             jbutton butt2=new jbutton(row,col,60,30,comp.get(i).getName());
             JButton button2 = butt2.getButton(comp.get(i).getName());
@@ -52,7 +52,7 @@ public class jpanel {
             jp.add(button2);
         }
         row=0;
-        col=90;
+        col=190;
         for (int i = 12; i < 16; i++) {
             jbutton butt3=new jbutton(row,col,60,30,comp.get(i).getName());
             JButton button3 = butt3.getButton(comp.get(i).getName());

@@ -50,15 +50,9 @@ public class Main {
         comp.add(buttEQUAL);
         comp.add(buttPLUS);
 
-        jpanel panel=new jpanel(0,0,260,200,"panel");
+        jpanel panel=new jpanel(10,0,245,225,"panel");
         JPanel getpanel = panel.getpanel(comp);
         frame1.add(getpanel);
-//        frame1.add(butt7);
-
-
-        
-
-
 
     }
 }
