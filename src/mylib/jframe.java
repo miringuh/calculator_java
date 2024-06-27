@@ -2,7 +2,6 @@ package mylib;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
 
 public class jframe extends JFrame {
     JFrame frame;
@@ -11,7 +10,6 @@ public class jframe extends JFrame {
     int width;
     int height;
     String name;
-
     public jframe(int x,int y,int width,int h,String nm) {
         this.xn=x;
         this.yn=y;
@@ -19,7 +17,6 @@ public class jframe extends JFrame {
         this.width=width;
         this.name=nm;
     }
-
     public JFrame getFrame(String title) {
         frame=new JFrame();
         frame.setName(this.name);
@@ -27,6 +24,7 @@ public class jframe extends JFrame {
         frame.setBounds(this.xn,this.yn,this.width,this.height);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(true);
+        frame.setMaximumSize(new Dimension(400,400));
         frame.setSize(this.width,this.height);
         frame.setAlwaysOnTop(false);
         frame.setLayout(null);

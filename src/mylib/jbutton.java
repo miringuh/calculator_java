@@ -23,6 +23,32 @@ public class jbutton extends JButton {
         this.width=width;
         this.name=nm;
     }
+    public Integer buttonValue(String val){
+        byte[] bytes = val.getBytes();
+        int value = 0;
+        if((bytes[0]-48)>=0 || (bytes[0]-48)<=9) {
+            value=(bytes[0] - 48);
+        }
+        if((bytes[0]-48)==-2){
+            value=10;
+        }
+        if((bytes[0]-48)==13){
+            value=11;
+        }
+        if((bytes[0]-48)==-5){
+            value=12;
+        }
+        if((bytes[0]-48)==-3){
+            value=13;
+        }
+        if((bytes[0]-48)==-11){
+            value=14;
+        }
+        if((bytes[0]-48)== 20){
+            value=15;
+        }
+        return value;
+    }
     public JButton getButton(String num) {
         button=new JButton();
         button.setText(num);
@@ -35,30 +61,22 @@ public class jbutton extends JButton {
         button.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent mouseEvent) {
-                System.out.print(" "+button.getName());
+                Integer i = buttonValue(button.getName());
+                System.out.print(" "+i);
             }
-
             @Override
             public void mousePressed(MouseEvent mouseEvent) {
-
             }
-
             @Override
             public void mouseReleased(MouseEvent mouseEvent) {
-
             }
-
             @Override
             public void mouseEntered(MouseEvent mouseEvent) {
-
             }
-
             @Override
             public void mouseExited(MouseEvent mouseEvent) {
-
             }
         });
-
         button.setVisible(true);
         return button;
     }
