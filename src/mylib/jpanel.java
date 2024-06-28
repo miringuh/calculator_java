@@ -4,6 +4,9 @@ import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.Objects;
 
 public class jpanel {
     JPanel jp;
@@ -35,7 +38,7 @@ public class jpanel {
         Border border=new LineBorder(new Color(13, 55, 216, 103),5,true);
         jp.setBorder(border);
         jp.setEnabled(true);
-//
+/*
         ArrayList<String>fd=new ArrayList<>(4);
         fd.add("File");
         fd.add("View");
@@ -55,8 +58,10 @@ public class jpanel {
         ArrayList<String>help=new ArrayList<>(2);
         help.add("Author");
         help.add("www.website.com");
-
         Component getjbar = bar.getjbar(fd, file, view, edit, help);
+        jp.add(getjbar);
+        */
+        Component getjbar = bar.getjbar();
         jp.add(getjbar);
 
         comp.add("7");
@@ -90,20 +95,6 @@ public class jpanel {
                 y+=space;
             }else {x+=80;}
         }
-
-        jp.setVisible(true);
-        return jp;
-    }
-    public  JPanel getpanel(Component comp) {
-        jp = new JPanel();
-        jp.setBounds(this.xn, this.yn, this.width, this.height);
-        jp.setName(this.name);
-        jp.setLayout(null);
-        jp.setPreferredSize(new Dimension(this.width,this.height));
-        Border border=new LineBorder(new Color(13, 55, 216, 103),5,true);
-        jp.setBorder(border);
-        jp.setEnabled(true);
-        jp.add(comp);
         jp.setVisible(true);
         return jp;
     }

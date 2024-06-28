@@ -7,9 +7,10 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+
 public class jmenuitems {
     JMenuItem item;
-//    jtooltip pop;
+    jtooltip pop;
     int xn;
     int yn;
     int height;
@@ -22,15 +23,17 @@ public class jmenuitems {
         this.width = w;
         this.name = name;
     }
+
     public JMenuItem jmenuitem(String lm){
         item=new JMenuItem();
-//        pop=new jtooltip(this.xn,this.yn,this.height,"pop");
+        pop=new jtooltip(this.xn,this.yn,this.height,"pop");
         Border border=new LineBorder(new Color(167, 168, 155),1,true);
         item.setBorder(border);
         item.setBounds(this.xn,this.yn,this.width,this.height);
         item.setBackground(new Color(229, 241, 149));
         item.setText(lm);
         item.setVisible((true));
+
         item.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent mouseEvent) {

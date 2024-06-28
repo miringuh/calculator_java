@@ -39,23 +39,18 @@ public class jbutton extends JButton {
 
         button.addMouseListener(new MouseListener() {
             @Override
-            public void mouseClicked(MouseEvent mouseEvent) {
+            public void mouseClicked(MouseEvent mouseEvent){
                 getbuttonvalue(button.getName());
-            }
-            @Override
-            public void mousePressed(MouseEvent mouseEvent) {
 
             }
             @Override
-            public void mouseReleased(MouseEvent mouseEvent) {
-
-            }
+            public void mousePressed(MouseEvent mouseEvent){}
             @Override
-            public void mouseEntered(MouseEvent mouseEvent) {
-            }
+            public void mouseReleased(MouseEvent mouseEvent){}
             @Override
-            public void mouseExited(MouseEvent mouseEvent) {
-            }
+            public void mouseEntered(MouseEvent mouseEvent){}
+            @Override
+            public void mouseExited(MouseEvent mouseEvent){}
         });
         button.setVisible(true);
         return button;
