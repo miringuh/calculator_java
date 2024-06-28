@@ -9,7 +9,6 @@ import java.util.ArrayList;
 
 public class jmenu {
     JMenu menu;
-    jtooltip pop;
     jmenuitems item;
     int xn;
     int yn;
@@ -24,7 +23,6 @@ public class jmenu {
         this.width = w;
         this.name = name;
     }
-
     //    public Component getmenuList(ArrayList<String>fd,ArrayList<String>file,ArrayList<String>view,ArrayList<String>edit,ArrayList<String>help){
 //        menu = new JMenu();
 //        if(fd.get(0).equals("File")){

@@ -12,6 +12,7 @@ public class jpanel {
     JPanel jp;
     jbutton butt;
     jmenubar bar;
+    pane pn;
     int xn;
     int yn;
     int width;
@@ -26,14 +27,16 @@ public class jpanel {
         this.name=name;
     }
 
-    public  JPanel getpanelComp() {
+    public  JPanel getpanelComp(Component comps) {
         jp = new JPanel();
+        pn=new pane(0,31,this.width,40,"xxxx");
         comp=new ArrayList<>(20);
         bar=new jmenubar(0,0,this.width,30,"menubar");
 
         jp.setBounds(this.xn, this.yn, this.width, this.height);
         jp.setName(this.name);
         jp.setLayout(null);
+        jp.setBackground(new Color(163, 190, 220, 213));
         jp.setPreferredSize(new Dimension(this.width,this.height));
         Border border=new LineBorder(new Color(13, 55, 216, 103),5,true);
         jp.setBorder(border);
@@ -67,34 +70,37 @@ public class jpanel {
         comp.add("7");
         comp.add("8");
         comp.add("9");
-        comp.add("CLR");
+        comp.add("CLR");//67
         comp.add("4");
         comp.add("5");
         comp.add("6");
-        comp.add("%");
+        comp.add("%");//37
         comp.add("1");
         comp.add("2");
         comp.add("3");
-        comp.add("-");
-        comp.add(".");
+        comp.add("-");//45
+        comp.add(".");//46
         comp.add("0");
-        comp.add("=");
-        comp.add("+");
-        comp.add("(");
-        comp.add(")");
-        comp.add("00");
-        comp.add("x");
+        comp.add("=");//61
+        comp.add("+");//43
+        comp.add("(");//40
+        comp.add(")");//41
+        comp.add("^");//94
+        comp.add("*");//42
         int x=10;
         int y=140;
         int space=40;
         for (int i = 0; i < 20; i++) {
             butt=new jbutton(x,y,80,40,comp.get(i));
-            jp.add(butt.getButton());
+            jp.add(butt.getButton(comps.getName()));
             if (i==3 || i==7 || i==11 || i==15 || i==19){
                 x=10;
                 y+=space;
             }else {x+=80;}
         }
+
+//        butt.
+        jp.add(comps);
         jp.setVisible(true);
         return jp;
     }

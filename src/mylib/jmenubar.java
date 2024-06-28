@@ -8,8 +8,6 @@ import java.util.ArrayList;
 public class jmenubar {
     JMenuBar jbar;
     jmenu menu;
-    jmenuitems items;
-    jtooltip pop;
     ArrayList <String> fd;
     ArrayList <String> file;
     ArrayList <String> view;
@@ -68,7 +66,6 @@ public class jmenubar {
         jbar.setEnabled(true);
         cnt=0;
         int fd_size = fd.size() * 12;
-        System.out.println(file.get(0));
         for (int i = 0; i < fd.size(); i++) {
             menu = new jmenu(0, cnt, 40, 30, fd.get(i));
             Component getjmenu = menu.getjmenu(fd.get(i), file, view, edit, help);

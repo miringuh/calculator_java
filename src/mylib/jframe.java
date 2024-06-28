@@ -2,6 +2,7 @@ package mylib;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class jframe extends JFrame {
     JFrame frame;
@@ -17,7 +18,7 @@ public class jframe extends JFrame {
         this.width=width;
         this.name=nm;
     }
-    public JFrame getFrame(String title) {
+    public JFrame getFrame(ArrayList<Component>comp, String title) {
         frame=new JFrame();
         frame.setName(this.name);
         frame.setTitle(title);
@@ -28,6 +29,11 @@ public class jframe extends JFrame {
         frame.setSize(this.width,this.height);
         frame.setAlwaysOnTop(false);
         frame.setLayout(null);
+
+        for (int i = 0; i < comp.size(); i++) {
+            frame.add(comp.get(i));
+        }
+
         frame.setVisible(true);
         return frame;
     }

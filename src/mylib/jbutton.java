@@ -13,7 +13,7 @@ public class jbutton extends JButton {
     int width;
     int height;
     String name;
-
+    int values;
     public jbutton(int x,int y,int width,int h,String nm) {
         this.xn=x;
         this.yn=y;
@@ -22,12 +22,20 @@ public class jbutton extends JButton {
         this.name=nm;
     }
     public Integer getbuttonvalue(String val){
-        System.out.print(" "+val);
-
-        return null;
+        int local=0;
+        byte[] bytes = val.getBytes();
+        int aByte = bytes[0];
+        if (aByte>=48 && aByte <=57) {
+            local=(aByte-48);
+//            System.out.print(local + " ");
+        }
+        if (aByte<=47 || aByte>=58){
+        System.out.print(aByte+" ");
+        }
+        return local;
     }
 
-    public JButton getButton() {
+    public JButton getButton(String comps) {
         button=new JButton();
         button.setText(this.name);
         button.setName(this.name);
@@ -41,6 +49,7 @@ public class jbutton extends JButton {
             @Override
             public void mouseClicked(MouseEvent mouseEvent){
                 getbuttonvalue(button.getName());
+                comps.toString();
 
             }
             @Override
