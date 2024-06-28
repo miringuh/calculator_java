@@ -1,10 +1,6 @@
 package mylib;
 
 import javax.swing.*;
-import javax.swing.border.BevelBorder;
-import javax.swing.border.Border;
-import javax.swing.border.LineBorder;
-import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -49,10 +45,10 @@ public class jbutton extends JButton {
         }
         return value;
     }
-    public JButton getButton(String num) {
+    public JButton getButton() {
         button=new JButton();
-        button.setText(num);
-        button.setName(num);
+        button.setText(this.name);
+        button.setName(this.name);
         button.setBounds(this.xn,this.yn,this.width,this.height);
 //        Border border=new LineBorder(new Color(223, 237, 2),2,true);
 //        setBorder(border);
