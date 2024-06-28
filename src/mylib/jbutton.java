@@ -1,8 +1,12 @@
 package mylib;
 
 import javax.swing.*;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.Border;
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 public class jbutton extends JButton {
     JButton button;
@@ -19,6 +23,11 @@ public class jbutton extends JButton {
         this.width=width;
         this.name=nm;
     }
+    public Integer getbuttonvalue(int val){
+
+        return val;
+    }
+
     public Integer buttonValue(String val){
         byte[] bytes = val.getBytes();
         int value = 0;
@@ -50,21 +59,24 @@ public class jbutton extends JButton {
         button.setText(this.name);
         button.setName(this.name);
         button.setBounds(this.xn,this.yn,this.width,this.height);
-//        Border border=new LineBorder(new Color(223, 237, 2),2,true);
-//        setBorder(border);
+        button.setFont(new Font(Font.SANS_SERIF,Font.BOLD,18));
+//        Border border=new BevelBorder(2,null,Color.magenta,Color.gray,Color.red);
+//        button.setBorder(border);
         button.setEnabled(true);
 
         button.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent mouseEvent) {
                 Integer i = buttonValue(button.getName());
-                System.out.print(" "+i);
+//                System.out.print(" "+i);
             }
             @Override
             public void mousePressed(MouseEvent mouseEvent) {
+
             }
             @Override
             public void mouseReleased(MouseEvent mouseEvent) {
+
             }
             @Override
             public void mouseEntered(MouseEvent mouseEvent) {
