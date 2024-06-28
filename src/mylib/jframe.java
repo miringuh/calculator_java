@@ -24,7 +24,7 @@ public class jframe extends JFrame {
         frame.setBounds(this.xn,this.yn,this.width,this.height);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(true);
-        frame.setMaximumSize(new Dimension(400,400));
+        frame.setMinimumSize(new Dimension(this.width,this.height));
         frame.setSize(this.width,this.height);
         frame.setAlwaysOnTop(false);
         frame.setLayout(null);

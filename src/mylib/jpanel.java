@@ -1,5 +1,4 @@
-import mylib.jbutton;
-
+package mylib;
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
@@ -9,6 +8,7 @@ import java.util.ArrayList;
 public class jpanel {
     JPanel jp;
     jbutton butt;
+    jmenubar bar;
     int xn;
     int yn;
     int width;
@@ -22,9 +22,12 @@ public class jpanel {
         this.height=height;
         this.name=name;
     }
+
     public  JPanel getpanelComp() {
         jp = new JPanel();
         comp=new ArrayList<>(20);
+        bar=new jmenubar(0,0,this.width,30,"menubar");
+
         jp.setBounds(this.xn, this.yn, this.width, this.height);
         jp.setName(this.name);
         jp.setLayout(null);
@@ -32,11 +35,34 @@ public class jpanel {
         Border border=new LineBorder(new Color(13, 55, 216, 103),5,true);
         jp.setBorder(border);
         jp.setEnabled(true);
+//
+        ArrayList<String>fd=new ArrayList<>(4);
+        fd.add("File");
+        fd.add("View");
+        fd.add("Edit");
+        fd.add("Help");
+
+        ArrayList<String>file=new ArrayList<>(3);
+        file.add("New");
+        file.add("Recent");
+        file.add("Exit");
+        ArrayList<String>view=new ArrayList<>(2);
+        view.add("Hex");
+        view.add("Decimal");
+        ArrayList<String>edit=new ArrayList<>(2);
+        edit.add("Copy");
+        edit.add("Paste");
+        ArrayList<String>help=new ArrayList<>(2);
+        help.add("Author");
+        help.add("www.website.com");
+
+        Component getjbar = bar.getjbar(fd, file, view, edit, help);
+        jp.add(getjbar);
 
         comp.add("7");
         comp.add("8");
         comp.add("9");
-        comp.add("DEL");
+        comp.add("CLR");
         comp.add("4");
         comp.add("5");
         comp.add("6");
