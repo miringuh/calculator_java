@@ -6,14 +6,14 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 
-public class jbutton extends JButton {
+public class jbutton{
     JButton button;
     int xn;
     int yn;
     int width;
     int height;
     String name;
-    int values;
+//    ArrayList<Integer> buttValues;
     public jbutton(int x,int y,int width,int h,String nm) {
         this.xn=x;
         this.yn=y;
@@ -21,23 +21,10 @@ public class jbutton extends JButton {
         this.width=width;
         this.name=nm;
     }
-    public Integer getbuttonvalue(String val){
-        int local=0;
-        byte[] bytes = val.getBytes();
-        int aByte = bytes[0];
-        if (aByte>=48 && aByte <=57) {
-            local=(aByte-48);
-//            System.out.print(local + " ");
-        }
-        if (aByte<=47 || aByte>=58){
-        System.out.print(aByte+" ");
-        }
-        return local;
-    }
 
-    public JButton getButton(String comps) {
+    public JButton getButton(String value) {
         button=new JButton();
-        button.setText(this.name);
+        button.setText(value);
         button.setName(this.name);
         button.setBounds(this.xn,this.yn,this.width,this.height);
         button.setFont(new Font(Font.SANS_SERIF,Font.BOLD,18));
@@ -46,11 +33,10 @@ public class jbutton extends JButton {
         button.setEnabled(true);
 
         button.addMouseListener(new MouseListener() {
+
             @Override
             public void mouseClicked(MouseEvent mouseEvent){
-                getbuttonvalue(button.getName());
-                comps.toString();
-
+                System.out.print(" "+value);
             }
             @Override
             public void mousePressed(MouseEvent mouseEvent){}
@@ -61,6 +47,8 @@ public class jbutton extends JButton {
             @Override
             public void mouseExited(MouseEvent mouseEvent){}
         });
+
+
         button.setVisible(true);
         return button;
     }

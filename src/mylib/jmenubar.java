@@ -67,7 +67,7 @@ public class jmenubar {
         cnt=0;
         int fd_size = fd.size() * 12;
         for (int i = 0; i < fd.size(); i++) {
-            menu = new jmenu(0, cnt, 40, 30, fd.get(i));
+            menu = new jmenu(0, 14, 40, 30, fd.get(i));
             Component getjmenu = menu.getjmenu(fd.get(i), file, view, edit, help);
             jbar.add(getjmenu);
             cnt += fd_size;

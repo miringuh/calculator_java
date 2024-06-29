@@ -1,9 +1,7 @@
 import mylib.jframe;
 import mylib.jpanel;
-import mylib.pane;
 
 import javax.swing.*;
-import javax.swing.text.Style;
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -15,14 +13,16 @@ public class Main {
         Main mn=new Main();
         jframe frame=new jframe(0,0,mn.width,mn.height,"frame");
         ArrayList<Component>comps=new ArrayList<>(20);
-        jpanel panel=new jpanel(0,0,340,350,"panel");
 
-        pane pn=new pane(10,40,320,35,"panel");
-        Component gettextpane = pn.gettextpane(" ");
+       jpanel panel=new jpanel(0,0,340,350,"panel");
+       JPanel getpanel = panel.getpanelComp();
+       comps.add(getpanel);
 
-        JPanel getpanel = panel.getpanelComp(gettextpane);
-        comps.add(getpanel);
+//        jlabel lab=new jlabel(0,0,70,"help");
+//        Component welcome = lab.getlabel("welcome");
+//        comps.add(welcome);
 
+//        pane pn=new pane()
 
         frame.getFrame(comps,"CALCULATOR");
 
