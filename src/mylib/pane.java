@@ -2,11 +2,14 @@ package mylib;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 
 
 public class pane {
     JPanel pane;
-    jlabel lab;
     int xn;
     int yn;
     int width;
@@ -24,18 +27,19 @@ public class pane {
 
     public Component gettextpane(String num){
         pane=new JPanel();
-        lab=new jlabel(this.xn,this.yn,this.height,"Mylabel");
-        Component getlabel = lab.getlabel(num);
         pane.setBounds(this.xn,this.yn,this.width,this.height);
         pane.setName(this.name);
         pane.setCursor(new Cursor(Cursor.TEXT_CURSOR));
         pane.setLayout(null);
         pane.setFont(new Font(Font.SANS_SERIF,Font.BOLD,18));
-        pane.add(getlabel);// added label
+
         pane.setVisible(true);
         return pane;
     }
 }
+
+
+
 /*
 //        comp=new ArrayList<>(20);
 //        comp.add("7");
@@ -72,3 +76,8 @@ public class pane {
 //        }
 
  */
+
+/*
+ pane pn = new pane(10, 40, 320, 35, " ");
+        Component gettextpane = pn.gettextpane("welcome");
+*/

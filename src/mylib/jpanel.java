@@ -3,13 +3,13 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 
 public class jpanel {
     JPanel jp;
-    jmenubar bar;
-    pane pn;
     jbutton butt;
     int xn;
     int yn;
@@ -18,6 +18,7 @@ public class jpanel {
     String name;
     ArrayList<String>comp;
     ArrayList<Integer>buttValues;
+    String labelvalue=" ";
     public jpanel(int x,int y,int width,int height,String name){
         this.xn=x;
         this.yn=y;
@@ -26,7 +27,7 @@ public class jpanel {
         this.name=name;
     }
 
-    public void getbuttonvalue(String val){
+    public ArrayList<Integer> getbuttonvalue(String val){
         buttValues=new ArrayList<>(20);
         byte[] bytes = val.getBytes();
         int aByte = bytes[0];
@@ -64,21 +65,29 @@ public class jpanel {
                 break;
             case 42://*
                 buttValues.add(13);
-                break;
+            break;
         }
-
+        return buttValues;
     }
 
-    public  JPanel getpanelComp() {
+    public void pthread(int val){
+        Runnable runner=new Runnable() {
+            @Override
+            public void run() {
+                ArrayList<Integer> getbuttonvalue = getbuttonvalue(comp.get(val));
+                jlabel lb=new jlabel(200,80,35," well");
+                Component getlabel = lb.getlabel(getbuttonvalue.get(0).toString());
+                System.out.print(" "+getbuttonvalue.get(0));
+                jp.add(getlabel);
+            }
+        };EventQueue.invokeLater(runner);
+    }
+
+    public  JPanel getpanelComp(Component apane) {
         jp = new JPanel();
-        pn = new pane(10, 40, 320, 35, " ");
-        Component gettextpane = pn.gettextpane("welcome");
-
-        bar = new jmenubar(10, 10, (this.width - 15), 30, "menubar");
-        Component getjbar = bar.getjbar();
-
-        jp.add(getjbar);
-        jp.add(gettextpane);
+//        pane pn=new pane(10,80,(this.width-18),35,"pane");
+//        Component panes = pn.gettextpane("Panes");
+//        jp.add(panes);
 
         jp.setBounds(this.xn, this.yn, this.width, this.height);
         jp.setName(this.name);
@@ -88,7 +97,6 @@ public class jpanel {
         Border border = new LineBorder(new Color(13, 55, 216, 103), 5, true);
         jp.setBorder(border);
         jp.setEnabled(true);
-
 
         comp = new ArrayList<>(20);
         comp.add("7");
@@ -114,49 +122,33 @@ public class jpanel {
         int x = 10;
         int y = 140;
         int space = 40;
-//        JButton button = null;
-        /// BUTTON PLOTTER ///
+
+        JButton button = null;
         for (int i = 0; i < comp.size(); i++) {
             butt = new jbutton(x, y, 80, 40, comp.get(i));
-            JButton button = butt.getButton(comp.get(i));
+            button = butt.getButton(comp.get(i));
             jp.add(button);
             if (i == 3 || i == 7 || i == 11 || i == 15 || i == 19) {
                 x = 10;
                 y += space;
             } else {x += 80;}
+            int finalI = i;
+
+            button.addMouseListener(new MouseListener() {
+                @Override
+                public void mouseClicked(MouseEvent mouseEvent) {
+                    labelvalue= comp.get(finalI);
+                }
+                @Override
+                public void mousePressed(MouseEvent mouseEvent) {}
+                @Override
+                public void mouseReleased(MouseEvent mouseEvent) {}
+                @Override
+                public void mouseEntered(MouseEvent mouseEvent) {}
+                @Override
+                public void mouseExited(MouseEvent mouseEvent) {}
+            });
         }
-
-//        button.addMouseListener(new MouseListener() {
-//            @Override
-//            public void mouseClicked(MouseEvent mouseEvent) {
-////                    getbuttonvalue(comp.get(0));
-////                    Component getlabel = lab.getlabel(comp.get(finalI));
-//                Component getlabel = lab.getlabel("elp");
-//                jp.add(getlabel);
-////                    System.out.print(" ");
-//            }
-//
-//            @Override
-//            public void mousePressed(MouseEvent mouseEvent) {
-//            }
-//
-//            @Override
-//            public void mouseReleased(MouseEvent mouseEvent) {
-//
-//            }
-//
-//            @Override
-//            public void mouseEntered(MouseEvent mouseEvent) {
-//
-//            }
-//
-//            @Override
-//            public void mouseExited(MouseEvent mouseEvent) {
-//
-//            }
-//        });
-
-
         jp.setVisible(true);
         return jp;
     }
