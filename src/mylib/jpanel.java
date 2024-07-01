@@ -74,11 +74,11 @@ public class jpanel {
         Runnable runner=new Runnable() {
             @Override
             public void run() {
-                ArrayList<Integer> getbuttonvalue = getbuttonvalue(comp.get(val));
-                jlabel lb=new jlabel(200,80,35," well");
-                Component getlabel = lb.getlabel(getbuttonvalue.get(0).toString());
-                System.out.print(" "+getbuttonvalue.get(0));
-                jp.add(getlabel);
+//                ArrayList<Integer> getbuttonvalue = getbuttonvalue(comp.get(val));
+//                jlabel lb=new jlabel(200,80,35," well");
+//                Component getlabel = lb.getlabel(getbuttonvalue.get(0).toString());
+//                System.out.print(" "+getbuttonvalue.get(0));
+//                jp.add(getlabel);
             }
         };EventQueue.invokeLater(runner);
     }
@@ -123,32 +123,17 @@ public class jpanel {
         int y = 140;
         int space = 40;
 
-        JButton button = null;
-        for (int i = 0; i < comp.size(); i++) {
-            butt = new jbutton(x, y, 80, 40, comp.get(i));
-            button = butt.getButton(comp.get(i));
-            jp.add(button);
-            if (i == 3 || i == 7 || i == 11 || i == 15 || i == 19) {
-                x = 10;
-                y += space;
-            } else {x += 80;}
-            int finalI = i;
+//        for (int i = 0; i < comp.size(); i++) {
+//            butt = new jbutton(x, y, 80, 40, comp.get(i));
+//
+//            if (i == 3 || i == 7 || i == 11 || i == 15 || i == 19) {
+//                x = 10;
+//                y += space;
+//            } else {x += 80;}
 
-            button.addMouseListener(new MouseListener() {
-                @Override
-                public void mouseClicked(MouseEvent mouseEvent) {
-                    labelvalue= comp.get(finalI);
-                }
-                @Override
-                public void mousePressed(MouseEvent mouseEvent) {}
-                @Override
-                public void mouseReleased(MouseEvent mouseEvent) {}
-                @Override
-                public void mouseEntered(MouseEvent mouseEvent) {}
-                @Override
-                public void mouseExited(MouseEvent mouseEvent) {}
-            });
-        }
+
+
+//        }
         jp.setVisible(true);
         return jp;
     }
