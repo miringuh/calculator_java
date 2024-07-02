@@ -37,7 +37,7 @@ public class pane {
         pane.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 18));
 
         jbutton[] butt=new jbutton[20];
-        String[] buttVal={"7","8","9","C","4","5","6","/","1","2","3","-",".","0","00","*","(",")","+","=" };
+        String[] buttVal={"7","8","9","C","4","5","6","/","1","2","3","-",".","0","00","*","(",")","+","="};
         int x = 10;
         int y = 140;
         int space = 40;
@@ -49,7 +49,7 @@ public class pane {
             pane.add(button[i]);
 
             jtext inp=new jtext(10,70,(this.width-20),40,buttVal[i]);
-            Component gettextarea = inp.gettextarea(buttVal[i],button[i]);
+            Component gettextarea = inp.gettextarea(button[i]);
             pane.add(gettextarea);
 
             if (i == 3 || i == 7 || i == 11 || i == 15 || i == 19) {

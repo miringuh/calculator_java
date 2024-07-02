@@ -27,61 +27,6 @@ public class jpanel {
         this.name=name;
     }
 
-    public ArrayList<Integer> getbuttonvalue(String val){
-        buttValues=new ArrayList<>(20);
-        byte[] bytes = val.getBytes();
-        int aByte = bytes[0];
-        if (aByte>=48 && aByte <=57) {
-            int valx=Integer.valueOf(val);
-            buttValues.add(valx);
-        }
-        switch (aByte){
-            case 67://clr
-                buttValues.add(19);
-                break;
-            case 37://%
-                buttValues.add(18);
-                break;
-            case 45://-
-                buttValues.add(17);
-                break;
-            case 46://. dot
-                buttValues.add(14);
-                break;
-            case 61://=
-                buttValues.add(15);
-                break;
-            case 43://+
-                buttValues.add(16);
-                break;
-            case 40://(
-                buttValues.add(10);
-                break;
-            case 41://)
-                buttValues.add(11);
-                break;
-            case 94://^
-                buttValues.add(12);
-                break;
-            case 42://*
-                buttValues.add(13);
-            break;
-        }
-        return buttValues;
-    }
-
-    public void pthread(int val){
-        Runnable runner=new Runnable() {
-            @Override
-            public void run() {
-//                ArrayList<Integer> getbuttonvalue = getbuttonvalue(comp.get(val));
-//                jlabel lb=new jlabel(200,80,35," well");
-//                Component getlabel = lb.getlabel(getbuttonvalue.get(0).toString());
-//                System.out.print(" "+getbuttonvalue.get(0));
-//                jp.add(getlabel);
-            }
-        };EventQueue.invokeLater(runner);
-    }
 
     public  JPanel getpanelComp(Component apane) {
         jp = new JPanel();

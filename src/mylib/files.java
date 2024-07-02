@@ -15,8 +15,7 @@ public class files {
         FileInputStream reads=new FileInputStream(this.Filename);
         try{
             byte[] bytes = reads.readAllBytes();
-            String st=new String(bytes);
-            return st;
+            return new String(bytes);
         }catch (IOException e){
             System.out.println("ERROR "+e);
             return null;

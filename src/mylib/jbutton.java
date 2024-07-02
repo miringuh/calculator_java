@@ -3,8 +3,6 @@ package mylib;
 import javax.swing.*;
 import java.awt.*;
 
-
-
 public class jbutton{
     JButton button;
     int xn;

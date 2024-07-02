@@ -3,23 +3,11 @@ package mylib;
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
-import javax.swing.event.AncestorEvent;
-import javax.swing.event.AncestorListener;
-import javax.swing.event.CaretEvent;
-import javax.swing.event.CaretListener;
-import javax.swing.text.BadLocationException;
-import javax.swing.text.Caret;
 import java.awt.*;
 import java.awt.event.*;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyVetoException;
-import java.beans.VetoableChangeListener;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
-
 public class jtext {
     JTextField txtarea;
     JPasswordField pass;
@@ -30,6 +18,7 @@ public class jtext {
     int height;
     String name;
     ArrayList<String> buttx=new ArrayList<>(20);
+    ArrayList<Integer>buttValues;
 
     public jtext(int xn, int yn, int w, int h, String name){
         this.xn=xn;
@@ -38,148 +27,55 @@ public class jtext {
         this.height=h;
         this.name=name;
     }
-    public Component getfieldtext(String word){
-        txtarea=new JTextField(word);
-        txtarea.setName(this.name);
-        txtarea.setBackground(new Color(205, 209, 189));
-        txtarea.setFont(new Font("Arial",Font.PLAIN,14));
-        Border border=new LineBorder(new Color(20,180, 132),2,true);
-        txtarea.setBorder(border);
-        txtarea.setCaretPosition(0);
-        txtarea.setBounds(this.xn,this.yn,this.width,this.height);
-        txtarea.addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent mouseEvent) {
-                txtarea.setText("");
-            }
 
-            @Override
-            public void mousePressed(MouseEvent mouseEvent) {
-
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent mouseEvent) {
-
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent mouseEvent) {
-            }
-
-            @Override
-            public void mouseExited(MouseEvent mouseEvent) {
-
-            }
-        });
-        txtarea.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                int st=actionEvent.paramString().indexOf("cmd=");
-                doReadfield(actionEvent.paramString().substring(st+4));
-            }
-        });
-
-        txtarea.setVisible(true);
-        return txtarea;
-    }
-    protected void doReadfield(Object obj){
-        char c;
-        int wdLen=obj.toString().indexOf(",");
-        ArrayList<Character> datax=new ArrayList<>();
-        for (int i = 0; i < wdLen; i++) {
-            c = obj.toString().toUpperCase().charAt(i);
-            datax.add(c);
+    public ArrayList<Integer> getbuttonvalue(String val){
+        buttValues=new ArrayList<>(25);
+        byte[] bytes = val.getBytes();
+        int aByte = bytes[0];
+        if (aByte>=48 && aByte <=57) {
+            int valx=Integer.parseInt(val);
+            buttValues.add(valx);
         }
-        String[] msg = new String[datax.size()];
-        String mesg="";
-        for (int i = 0; i < datax.size(); i++) {
-            msg[i] = mesg.concat(datax.get(i).toString());
-            System.out.print(msg[i]);
+        switch (aByte){
+            case 67://clr
+                buttValues.add(19);
+                break;
+            case 47:// /
+                buttValues.add(18);
+                break;
+            case 45://-
+                buttValues.add(17);
+                break;
+            case 46://. dot
+                buttValues.add(14);
+                break;
+            case 61://=
+                buttValues.add(15);
+                break;
+            case 43://+
+                buttValues.add(16);
+                break;
+            case 40://(
+                buttValues.add(10);
+                break;
+            case 41://)
+                buttValues.add(11);
+                break;
+            case 94://^
+                buttValues.add(12);
+                break;
+            case 42://*
+                buttValues.add(13);
+                break;
         }
-        String val=new String();
-        txtField = val.formatted("%s", msg);
-        System.out.println(txtField);
-
-    }
-    public Component getfieldPasword(){
-        pass=new JPasswordField("password");
-        pass.setName(this.name);
-        pass.setBackground(new Color(205, 209, 189));
-        Border border=new LineBorder(new Color(103, 41, 77),2,true);
-        pass.setBorder(border);
-        pass.setEditable(true);
-        pass.setBounds(this.xn,this.yn,this.width,this.height);
-        pass.setCaretPosition(0);
-        pass.setCaretColor(new Color(220, 21, 21));
-        pass.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                int st=actionEvent.paramString().indexOf("cmd=");
-                doReadfield(actionEvent.paramString().substring(st+4));
-            }
-        });
-        pass.addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent mouseEvent) {
-                pass.setText("");
-            }
-
-            @Override
-            public void mousePressed(MouseEvent mouseEvent) {
-
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent mouseEvent) {
-
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent mouseEvent) {
-                pass.setToolTipText("PassWord");
-            }
-
-            @Override
-            public void mouseExited(MouseEvent mouseEvent) {
-
-            }
-        });
-        pass.setEnabled(true);
-        pass.setVisible(true);
-        return pass;
-    }
-    public Component getdatefield(){
-        txtarea=new JFormattedTextField(new Date() );
-        txtarea.setName(this.name);
-        txtarea.setBackground(new Color(205, 209, 189));
-        txtarea.setFont(new Font("Arial",Font.PLAIN,14));
-        Border border=new LineBorder(new Color(20,180, 132),2,true);
-        txtarea.setBorder(border);
-        txtarea.setCaretPosition(0);
-        txtarea.setBounds(this.xn,this.yn,this.width,this.height);
-        txtarea.setToolTipText("Edit date");
-        txtarea.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                String text = txtarea.getText();
-                System.out.println(text);
-            }
-        });
-
-        txtarea.setEnabled(true);
-        txtarea.setVisible(true);
-        return txtarea;
+        return buttValues;
     }
 
-    public String read_textarea(String comp){
-        return comp;
-    }
-    public Component gettextarea(String val,Component butt) {
+    public Component gettextarea(Component butt) {
         JTextArea area=new JTextArea();
         Border border=new LineBorder(new Color(20,180, 132),2,true);
         area.setBorder(border);
-//        area.setText(comp.getName());
+//        area.setText(butt.getName());
         area.setName(this.name);
         area.setFont(new Font(Font.SANS_SERIF,Font.BOLD,22));
         area.setWrapStyleWord(false);
@@ -191,28 +87,28 @@ public class jtext {
 
         files fd=new files("panel.txt");
         final String[] s = new String[1];
+        final String[] name1 = new String[1];
 
         butt.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent mouseEvent) {
-                String name1 = butt.getName();
+                name1[0] = butt.getName();
+                ArrayList<Integer> getbuttonvalue = getbuttonvalue(name1[0]);
                 try {
-                    if (name1.equals("C")){
+                    if (getbuttonvalue.get(0).equals(19)){
                         fd.flushFile();
                         area.setText(" ");
 
                     }else{
                     s[0] = fd.readFile();
-                    fd.writeFile(s[0].concat(name1));
-                    area.setText(s[0].concat(name1));
-//                    System.out.println(name1);
+                    fd.writeFile(s[0].concat(name1[0]));
+                    area.setText(s[0].concat(name1[0]));
                     }
-
-
 
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
+
 
             }
 
