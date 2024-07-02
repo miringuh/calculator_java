@@ -2,8 +2,7 @@ package mylib;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+
 
 
 public class jbutton{
@@ -26,8 +25,6 @@ public class jbutton{
         button.setBounds(this.xn,this.yn,this.width,this.height);
         button.setFont(new Font(Font.SANS_SERIF,Font.BOLD,18));
         button.setEnabled(true);
-
-
         button.setVisible(true);
         return button;
     }

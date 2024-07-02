@@ -3,10 +3,21 @@ package mylib;
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
+import javax.swing.event.AncestorEvent;
+import javax.swing.event.AncestorListener;
+import javax.swing.event.CaretEvent;
+import javax.swing.event.CaretListener;
+import javax.swing.text.BadLocationException;
 import javax.swing.text.Caret;
 import java.awt.*;
 import java.awt.event.*;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyVetoException;
+import java.beans.VetoableChangeListener;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 
 public class jtext {
@@ -18,6 +29,8 @@ public class jtext {
     int width;
     int height;
     String name;
+    ArrayList<String> buttx=new ArrayList<>(20);
+
     public jtext(int xn, int yn, int w, int h, String name){
         this.xn=xn;
         this.yn=yn;
@@ -159,29 +172,55 @@ public class jtext {
         return txtarea;
     }
 
-    public String read_textarea(Component comp){
-        String name1 = comp.getName();
-        return name1;
+    public String read_textarea(String comp){
+        return comp;
     }
-    public Component gettextarea(Component comp){
+    public Component gettextarea(String val,Component butt) {
         JTextArea area=new JTextArea();
         Border border=new LineBorder(new Color(20,180, 132),2,true);
         area.setBorder(border);
-        area.setTabSize(4);
+//        area.setText(comp.getName());
+        area.setName(this.name);
         area.setFont(new Font(Font.SANS_SERIF,Font.BOLD,22));
-        area.setWrapStyleWord(true);
+        area.setWrapStyleWord(false);
         area.setBounds(this.xn,this.yn,this.width,this.height);
+        area.setLineWrap(false);
+        area.setEditable(false);
+        area.setEnabled(true);
+        area.setLayout(null);
 
-        comp.addMouseListener(new MouseListener() {
+        files fd=new files("panel.txt");
+        final String[] s = new String[1];
+
+        butt.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent mouseEvent) {
-                String name1 = comp.getName();
-                area.setText(name1);
+                String name1 = butt.getName();
+                try {
+                    if (name1.equals("C")){
+                        fd.flushFile();
+                        area.setText(" ");
+
+                    }else{
+                    s[0] = fd.readFile();
+                    fd.writeFile(s[0].concat(name1));
+                    area.setText(s[0].concat(name1));
+//                    System.out.println(name1);
+                    }
+
+
+
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+
             }
 
             @Override
             public void mousePressed(MouseEvent mouseEvent) {
-
+//                String name1 = area.getName();
+//                buttx.add(name1);
+//                System.out.println("nn "+area.getName());
             }
 
             @Override
@@ -199,7 +238,7 @@ public class jtext {
 
             }
         });
-        area.setEnabled(true);
+
         area.setVisible(true);
         return area;
     }
