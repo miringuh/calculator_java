@@ -8,11 +8,7 @@ import java.awt.event.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 public class jtext {
-    JTextField txtarea;
-    JPasswordField pass;
-    String txtField;
     int yn;
     int xn;
     int width;
@@ -98,7 +94,7 @@ public class jtext {
         area.setEnabled(true);
         area.setLayout(null);
 
-        files fd=new files("panel.txt");
+        files fd=new files(".panel.txt");
         final String[] s = new String[1];
         final String[] name1 = new String[1];
 
@@ -107,10 +103,6 @@ public class jtext {
             public void mouseClicked(MouseEvent mouseEvent) {
                 name1[0] = butt.getName();
                 ArrayList<Integer> getbuttonvalue = getbuttonvalue(name1[0]);
-//                System.out.println(getbuttonvalue.get(0));
-                //0.....9
-                // (-10, )-11, +-16, =-15, *-13, --17, /-18 C-19 .=14
-
 
                 if (getbuttonvalue.get(0).equals(19)){// clr
                     try {
@@ -119,7 +111,6 @@ public class jtext {
                     } catch (FileNotFoundException e) {
                         throw new RuntimeException(e);
                     }
-
                 }else if(!getbuttonvalue.get(0).equals(15)){
                     try {
                         s[0] = fd.readFile();
