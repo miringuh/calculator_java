@@ -5,6 +5,8 @@ import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.*;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -14,7 +16,6 @@ public class jtext {
     int width;
     int height;
     String name;
-    ArrayList<String> buttx=new ArrayList<>(20);
     ArrayList<Integer>buttValues;
 
     public jtext(int xn, int yn, int w, int h, String name){
@@ -24,8 +25,7 @@ public class jtext {
         this.height=h;
         this.name=name;
     }
-
-    public ArrayList<Integer> getbuttonvalue(String val){
+    private ArrayList<Integer> getbuttonvalue(String val){
         buttValues=new ArrayList<>(25);
         byte[] bytes = val.getBytes();
         int aByte = Integer.parseInt(String.valueOf(bytes[0]));
@@ -79,7 +79,6 @@ public class jtext {
         }
         return buttValues;
     }
-
     public Component gettextarea(Component butt) {
         JTextArea area=new JTextArea();
         Border border=new LineBorder(new Color(20,180, 132),2,true);
@@ -90,7 +89,7 @@ public class jtext {
         area.setWrapStyleWord(false);
         area.setBounds(this.xn,this.yn,this.width,this.height);
         area.setLineWrap(false);
-        area.setEditable(false);
+        area.setEditable(true);
         area.setEnabled(true);
         area.setLayout(null);
 
@@ -98,6 +97,17 @@ public class jtext {
         final String[] s = new String[1];
         final String[] name1 = new String[1];
 
+        area.addPropertyChangeListener(new PropertyChangeListener() {
+            @Override
+            public void propertyChange(PropertyChangeEvent propertyChangeEvent) {
+                try {
+                    fd.flushFile();
+                    area.setText(" ");
+                } catch (FileNotFoundException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
         butt.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent mouseEvent) {
@@ -108,7 +118,7 @@ public class jtext {
                     try {
                         fd.flushFile();
                         area.setText(" ");
-                    } catch (FileNotFoundException e) {
+                    } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
                 }else if(!getbuttonvalue.get(0).equals(15)){
@@ -128,7 +138,6 @@ public class jtext {
                 if (getbuttonvalue.get(0).equals(15)){// =
                     try {
                         s[0] = fd.readFile();
-//                        System.out.println(s[0]);
                         calcLogic logic=new calcLogic();
                         int logic1 = logic.Logic();
                         area.setText(String.valueOf(logic1));
@@ -137,7 +146,6 @@ public class jtext {
                         throw new RuntimeException(e);
                     }
                 }
-
             }
             @Override
             public void mousePressed(MouseEvent mouseEvent) {
@@ -156,4 +164,5 @@ public class jtext {
         area.setVisible(true);
         return area;
     }
+
 }

@@ -52,7 +52,7 @@ public class jmenubar {
 
         help=new ArrayList<>(3);
         help.add("Author");
-        help.add("Doccumentation");
+        help.add("Documentation");
         help.add("www.website.com");
     }
     public Component getjbar(){
@@ -66,9 +66,9 @@ public class jmenubar {
         jbar.setEnabled(true);
         cnt=0;
         int fd_size = fd.size() * 12;
-        for (int i = 0; i < fd.size(); i++) {
-            menu = new jmenu(0, 14, 40, 30, fd.get(i));
-            Component getjmenu = menu.getjmenu(fd.get(i), file, view, edit, help);
+        for (String s : fd) {
+            menu = new jmenu(0, 14, 40, 30, s);
+            Component getjmenu = menu.getjmenu(s, file, view, edit, help);
             jbar.add(getjmenu);
             cnt += fd_size;
         }

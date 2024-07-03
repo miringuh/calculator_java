@@ -87,7 +87,6 @@ public class calcLogic {
             int next = readList(val2);
           return base+next;
       }
-
       public int Logic() throws IOException {
             val0=new ArrayList<>(20);
             val1=new ArrayList<>(20);
@@ -99,8 +98,7 @@ public class calcLogic {
             int state=0;
             String s = fs.readFile();
             byte[] bytes = s.getBytes();
-
-//          +->43, -->45, *->42, /->47,(->40,  )->41
+//          +->43, -->45, *->42, /->47, (->40,  )->41
             for (int i = 0; i < s.length(); i++) {
                   if(state==1){
                         val1.add(bytes[i]);

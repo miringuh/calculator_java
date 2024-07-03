@@ -22,7 +22,7 @@ public class pane {
         this.name = nm;
     }
 
-    public Component gettextpane(String num) {
+    public Component gettextpane() {
         pane = new JPanel();
         jmenubar bar=new jmenubar(10,10,(this.width-20),40,"Bar");
         Component getjbar = bar.getjbar();

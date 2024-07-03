@@ -18,7 +18,7 @@ public class jframe extends JFrame {
         this.width=width;
         this.name=nm;
     }
-    public JFrame getFrame(ArrayList<Component>comp, String title) {
+    public void getFrame(ArrayList<Component>comp, String title) {
         frame=new JFrame();
         frame.setName(this.name);
         frame.setTitle(title);
@@ -30,11 +30,10 @@ public class jframe extends JFrame {
         frame.setAlwaysOnTop(false);
         frame.setLayout(null);
 
-        for (int i = 0; i < comp.size(); i++) {
-            frame.add(comp.get(i));
+        for (Component component : comp) {
+            frame.add(component);
         }
 
         frame.setVisible(true);
-        return frame;
     }
 }

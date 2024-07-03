@@ -3,22 +3,18 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 
 public class jpanel {
     JPanel jp;
-    jbutton butt;
     int xn;
     int yn;
     int width;
     int height;
     String name;
     ArrayList<String>comp;
-    ArrayList<Integer>buttValues;
-    String labelvalue=" ";
+
     public jpanel(int x,int y,int width,int height,String name){
         this.xn=x;
         this.yn=y;
@@ -27,13 +23,8 @@ public class jpanel {
         this.name=name;
     }
 
-
     public  JPanel getpanelComp(Component apane) {
         jp = new JPanel();
-//        pane pn=new pane(10,80,(this.width-18),35,"pane");
-//        Component panes = pn.gettextpane("Panes");
-//        jp.add(panes);
-
         jp.setBounds(this.xn, this.yn, this.width, this.height);
         jp.setName(this.name);
         jp.setLayout(null);
@@ -66,19 +57,6 @@ public class jpanel {
         comp.add("*");//42
         int x = 10;
         int y = 140;
-        int space = 40;
-
-//        for (int i = 0; i < comp.size(); i++) {
-//            butt = new jbutton(x, y, 80, 40, comp.get(i));
-//
-//            if (i == 3 || i == 7 || i == 11 || i == 15 || i == 19) {
-//                x = 10;
-//                y += space;
-//            } else {x += 80;}
-
-
-
-//        }
         jp.setVisible(true);
         return jp;
     }

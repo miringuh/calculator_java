@@ -23,72 +23,39 @@ public class jmenu {
         this.width = w;
         this.name = name;
     }
-    //    public Component getmenuList(ArrayList<String>fd,ArrayList<String>file,ArrayList<String>view,ArrayList<String>edit,ArrayList<String>help){
-//        menu = new JMenu();
-//        if(fd.get(0).equals("File")){
-//            for (int i = 0; i < file.size(); i++) {
-//                item = new jmenuitems(0, 0, 40, 30, file.get(i));
-//                JMenuItem jmenuitem = item.jmenuitem(file.get(i));
-//                menu.add(jmenuitem);
-//            }
-//        }
-//        if(fd.get(1).equals("View")){
-//            for (int i = 0; i < view.size(); i++) {
-//                Component getjmenu = getjmenu(view.get(i));
-//                item = new jmenuitems(0, 0, 40, 30, view.get(i));
-//                JMenuItem jmenuitem = item.jmenuitem(view.get(i));
-//                menu.add(jmenuitem);
-//            }
-//        }
-//        if(fd.get(2).equals("Edit")){
-//            for (int i = 0; i < edit.size(); i++) {
-//                item = new jmenuitems(0, 0, 40, 30, edit.get(i));
-//                JMenuItem jmenuitem = item.jmenuitem(edit.get(i));
-//                menu.add(jmenuitem);
-//            }
-//        }
-//        if(fd.get(3).equals("Help")){
-//            for (int i = 0; i < help.size(); i++) {
-//                item = new jmenuitems(0, 0, 40, 30, help.get(i));
-//                JMenuItem jmenuitem = item.jmenuitem(help.get(i));
-//                menu.add(jmenuitem);
-//            }
-//        }
-//        return menu;
-//    }
-//
     public Component getjmenu(String fd, ArrayList<String> file, ArrayList<String> view, ArrayList<String> edit, ArrayList<String> help) {
         menu = new JMenu();
         menu.setBounds(this.xn, this.yn, this.width, this.height);
         menu.setBackground(new Color(202, 223, 114));
         menu.setName(this.name);
         menu.setText(this.name);
+        menu.setFont(new Font(Font.SANS_SERIF,Font.BOLD,14));
         menu.setFocusPainted(true);
         if (fd.equals("File")) {
-            for (int i = 0; i < file.size(); i++) {
-                item = new jmenuitems(0, 0, 40, 30, file.get(i));
-                JMenuItem jmenuitem = item.jmenuitem(file.get(i));
+            for (String s : file) {
+                item = new jmenuitems(0, 0, 40, 30, s);
+                JMenuItem jmenuitem = item.jmenuitem(s);
                 menu.add(jmenuitem);
             }
         }
         if (fd.equals("View")) {
-            for (int i = 0; i < view.size(); i++) {
-                item = new jmenuitems(0, 0, 40, 30, view.get(i));
-                JMenuItem jmenuitem = item.jmenuitem(view.get(i));
+            for (String s : view) {
+                item = new jmenuitems(0, 0, 40, 30, s);
+                JMenuItem jmenuitem = item.jmenuitem(s);
                 menu.add(jmenuitem);
             }
         }
         if (fd.equals("Edit")) {
-            for (int i = 0; i < edit.size(); i++) {
-                item = new jmenuitems(0, 0, 40, 30, edit.get(i));
-                JMenuItem jmenuitem = item.jmenuitem(edit.get(i));
+            for (String s : edit) {
+                item = new jmenuitems(0, 0, 40, 30, s);
+                JMenuItem jmenuitem = item.jmenuitem(s);
                 menu.add(jmenuitem);
             }
         }
         if (fd.equals("Help")) {
-            for (int i = 0; i < help.size(); i++) {
-                item = new jmenuitems(0, 0, 40, 30, help.get(i));
-                JMenuItem jmenuitem = item.jmenuitem(help.get(i));
+            for (String s : help) {
+                item = new jmenuitems(0, 0, 40, 30, s);
+                JMenuItem jmenuitem = item.jmenuitem(s);
                 menu.add(jmenuitem);
             }
             menu.addMenuListener(new MenuListener() {

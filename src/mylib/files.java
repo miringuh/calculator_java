@@ -11,7 +11,7 @@ public class files {
         this.Filename=filename;
     }
 
-    public String readFile()throws IOException {
+    public String readFile()throws FileNotFoundException {
         FileInputStream reads=new FileInputStream(this.Filename);
         try{
             byte[] bytes = reads.readAllBytes();
@@ -19,11 +19,9 @@ public class files {
         }catch (IOException e){
             System.out.println("ERROR "+e);
             return null;
-        }finally {
-            reads.close();
         }
     }
-    public void writeFile(String word)throws IOException {
+    public void writeFile(String word)throws FileNotFoundException {
         try{
             FileOutputStream writes=new FileOutputStream(this.Filename);
             writes.write(word.getBytes());
@@ -34,7 +32,6 @@ public class files {
         }
 
     }
-
     public void flushFile() throws FileNotFoundException {
         FileOutputStream flash=new FileOutputStream(this.Filename);
         try {

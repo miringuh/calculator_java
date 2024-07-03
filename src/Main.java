@@ -1,7 +1,5 @@
 import java.awt.*;
-import java.io.IOException;
 import java.util.ArrayList;
-import javax.swing.*;
 
 import mylib.*;
 
@@ -9,7 +7,7 @@ import mylib.*;
 public class Main {
     int width=350;
     int height=360;
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         Main mn=new Main();
         jframe frame=new jframe(0,0,mn.width,mn.height,"frame");
 
@@ -31,7 +29,7 @@ public class Main {
 //        fd.writeFile("word");
 
         pane pn=new pane(0,0,340,350,"panel");
-        Component pn1 = pn.gettextpane("pn");
+        Component pn1 = pn.gettextpane();
         comps.add(pn1);
 
 //        calcLogic lg=new calcLogic();
