@@ -34,6 +34,7 @@ public class files {
         }
 
     }
+
     public void flushFile() throws FileNotFoundException {
         FileOutputStream flash=new FileOutputStream(this.Filename);
         try {

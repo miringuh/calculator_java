@@ -30,14 +30,14 @@ public class Main {
 //        files fd=new files("panel.txt");
 //        fd.writeFile("word");
 
-//        pane pn=new pane(0,0,340,350,"panel");
-//        Component pn1 = pn.gettextpane("pn");
-//        comps.add(pn1);
+        pane pn=new pane(0,0,340,350,"panel");
+        Component pn1 = pn.gettextpane("pn");
+        comps.add(pn1);
 
-        calcLogic lg=new calcLogic();
-        lg.Logic();
+//        calcLogic lg=new calcLogic();
+//        lg.Logic();
 
-//        frame.getFrame(comps,"CALCULATOR");
+        frame.getFrame(comps,"CALCULATOR");
 
     }
 }

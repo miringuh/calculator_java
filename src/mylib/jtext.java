@@ -5,6 +5,7 @@ import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -31,12 +32,24 @@ public class jtext {
     public ArrayList<Integer> getbuttonvalue(String val){
         buttValues=new ArrayList<>(25);
         byte[] bytes = val.getBytes();
-        int aByte = bytes[0];
-        if (aByte>=48 && aByte <=57) {
-            int valx=Integer.parseInt(val);
-            buttValues.add(valx);
-        }
+        int aByte = Integer.parseInt(String.valueOf(bytes[0]));
+/*
+.=46,(-40, )-41, +-43, =-61, *-42, --45, /-47, C-67
+*/
         switch (aByte){
+            case 48 :
+            case 49 :
+            case 50 :
+            case 51 :
+            case 52 :
+            case 53 :
+            case 54 :
+            case 55 :
+            case 56 :
+            case 57 :
+                int valx=Integer.parseInt(val);
+                buttValues.add(valx);
+                break;
             case 67://clr
                 buttValues.add(19);
                 break;
@@ -76,7 +89,7 @@ public class jtext {
         Border border=new LineBorder(new Color(20,180, 132),2,true);
         area.setBorder(border);
 //        area.setText(butt.getName());
-        area.setName(this.name);
+        area.setName(butt.getName());
         area.setFont(new Font(Font.SANS_SERIF,Font.BOLD,22));
         area.setWrapStyleWord(false);
         area.setBounds(this.xn,this.yn,this.width,this.height);
@@ -94,44 +107,58 @@ public class jtext {
             public void mouseClicked(MouseEvent mouseEvent) {
                 name1[0] = butt.getName();
                 ArrayList<Integer> getbuttonvalue = getbuttonvalue(name1[0]);
-                try {
-                    if (getbuttonvalue.get(0).equals(19)){
+//                System.out.println(getbuttonvalue.get(0));
+                //0.....9
+                // (-10, )-11, +-16, =-15, *-13, --17, /-18 C-19 .=14
+
+
+                if (getbuttonvalue.get(0).equals(19)){// clr
+                    try {
                         fd.flushFile();
                         area.setText(" ");
-
-                    }else{
-                    s[0] = fd.readFile();
-                    fd.writeFile(s[0].concat(name1[0]));
-                    area.setText(s[0].concat(name1[0]));
+                    } catch (FileNotFoundException e) {
+                        throw new RuntimeException(e);
                     }
 
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
+                }else if(!getbuttonvalue.get(0).equals(15)){
+                    try {
+                        s[0] = fd.readFile();
+
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                    try {
+                        fd.writeFile(s[0].concat(name1[0]));
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                    area.setText(s[0].concat(name1[0]));
+                }
+                if (getbuttonvalue.get(0).equals(15)){// =
+                    try {
+                        s[0] = fd.readFile();
+//                        System.out.println(s[0]);
+                        calcLogic logic=new calcLogic();
+                        int logic1 = logic.Logic();
+                        area.setText(String.valueOf(logic1));
+
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
 
-
             }
-
             @Override
             public void mousePressed(MouseEvent mouseEvent) {
-//                String name1 = area.getName();
-//                buttx.add(name1);
-//                System.out.println("nn "+area.getName());
             }
-
             @Override
             public void mouseReleased(MouseEvent mouseEvent) {
-
             }
-
             @Override
             public void mouseEntered(MouseEvent mouseEvent) {
-
             }
-
             @Override
             public void mouseExited(MouseEvent mouseEvent) {
-
             }
         });
 
