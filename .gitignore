@@ -24,6 +24,6 @@ bin/
 
 ### VS Code ###
 .vscode/
-/home/george/devs/Javagui/calculator_java/.idea
+.idea
 ### Mac OS ###
 .DS_Store
