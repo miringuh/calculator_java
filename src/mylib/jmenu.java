@@ -1,10 +1,10 @@
 package mylib;
 
+import java.awt.*;
+import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.event.MenuEvent;
 import javax.swing.event.MenuListener;
-import java.awt.*;
-import java.util.ArrayList;
 
 
 public class jmenu {
@@ -15,13 +15,16 @@ public class jmenu {
     int height;
     int width;
     String name;
-
+    Component mycomp;
     public jmenu(int xn, int yn, int w, int h, String name) {
         this.xn = xn;
         this.yn = yn;
         this.height = h;
         this.width = w;
         this.name = name;
+    }
+    public void getComp(Component comp){
+        this.mycomp=comp;
     }
     public Component getjmenu(String fd, ArrayList<String> file, ArrayList<String> view, ArrayList<String> edit, ArrayList<String> help) {
         menu = new JMenu();

@@ -19,7 +19,7 @@ public class jmenubar {
     int height;
     String name;
     int cnt;
-
+    Component mycomp;
     public jmenubar(int xn, int yn, int w, int h, String name) {
         this.xn = xn;
         this.yn = yn;
@@ -27,6 +27,10 @@ public class jmenubar {
         this.height = h;
         this.name = name;
     }
+    public void getComp(Component comp){
+        this.mycomp=comp;
+    }
+
     public void get_Abar() {
         fd=new ArrayList<>(4);
         fd.add("File");
@@ -55,9 +59,11 @@ public class jmenubar {
         help.add("Documentation");
         help.add("www.website.com");
     }
+
     public Component getjbar(){
         jbar=new JMenuBar();
         get_Abar();
+
         jbar.setName(this.name);
         Border border=new LineBorder(new Color(160, 227, 190),2,true);
         jbar.setBorder(border);
@@ -68,13 +74,16 @@ public class jmenubar {
         int fd_size = fd.size() * 12;
         for (String s : fd) {
             menu = new jmenu(0, 14, 40, 30, s);
+            menu.getComp(mycomp);
             Component getjmenu = menu.getjmenu(s, file, view, edit, help);
+
             jbar.add(getjmenu);
             cnt += fd_size;
         }
-
         jbar.setVisible(true);
         return jbar;
             }
-        }
+
+
+}
 

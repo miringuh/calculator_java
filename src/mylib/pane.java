@@ -5,15 +5,15 @@ import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 
-public class pane {
+public class pane{
     JPanel pane;
     int xn;
     int yn;
     int width;
     int height;
     String name;
+    Component mycomp;
 
-    //int val=Integer.valueOf(myString).intValue();
     public pane(int x, int y, int width, int h, String nm) {
         this.xn = x;
         this.yn = y;
@@ -22,9 +22,15 @@ public class pane {
         this.name = nm;
     }
 
+    public void getComp(Component comp){
+        this.mycomp=comp;
+    }
+
     public Component gettextpane() {
         pane = new JPanel();
+
         jmenubar bar=new jmenubar(10,10,(this.width-20),40,"Bar");
+        bar.getComp(mycomp);
         Component getjbar = bar.getjbar();
         pane.add(getjbar);
         pane.setBounds(this.xn, this.yn, this.width, this.height);
@@ -61,6 +67,7 @@ public class pane {
         pane.setVisible(true);
         return pane;
         }
+
 
 }
 
