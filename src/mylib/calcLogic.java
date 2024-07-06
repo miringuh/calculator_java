@@ -11,6 +11,37 @@ public class calcLogic {
       ArrayList<Byte>val3;
       ArrayList<Byte>sign;
       ArrayList<Byte>ans;
+
+      private int calculate() throws IOException {
+          fs = new files(".panel.txt");
+
+          int buff0=0;
+          int buff1=0;
+          int buff2=0;
+          int buff3=0;
+          ArrayList<Integer> buffer=new ArrayList<>(4);
+          buffer.add(buff0);
+          buffer.add(buff1);
+          buffer.add(buff2);
+          buffer.add(buff3);
+          if (!val0.isEmpty()){buff0=readList(val0);}
+          if (!val1.isEmpty()){buff1=readList(val1);}
+          if (!val2.isEmpty()){buff2=readList(val2);}
+          if (!val3.isEmpty()){buff3=readList(val3);}
+          if (buff0>=1){buffer.add(buff0);}
+          if (buff1>=1){buffer.add(buff1);}
+          if (buff2>=1){buffer.add(buff2);}
+          if (buff3>=1){buffer.add(buff3);}
+          /////////////////////////////////
+          String format;
+          for (int i = 0; i < sign.size(); i++) {
+//        (->40,  )->41, *->42, +->43, -->45, /->47,
+             
+          }
+
+          return 0;
+      }
+
       private int readList(ArrayList<Byte> obj3){
             fs = new files(".panel.txt");
             String s1;
@@ -31,62 +62,57 @@ public class calcLogic {
           }
             return val_0;
       }
+//
+//      private int sum2(ArrayList<Byte>obj1,ArrayList<Byte>obj2) throws IOException {
+//          int high = readList(obj1);
+//          int low = readList(obj2);
+//          int sums = Math.addExact(high, low);
+//            String format = String.format("%s", sums);
+//            try {
+//                  fs.writeFile(format);
+//            } catch (IOException e) {
+//                  throw new RuntimeException(e);
+//            }
+//            return sums;
+//      }
+//      private int minus2(ArrayList<Byte>obj1,ArrayList<Byte>obj2) throws IOException {
+//          int high = readList(obj1);
+//          int low = readList(obj2);
+//          int sums = Math.subtractExact(high, low);
+//            String format = String.format("%s", sums);
+//            try {
+//                  fs.writeFile(format);
+//            } catch (IOException e) {
+//                  throw new RuntimeException(e);
+//            }
+//            return sums;
+//      }
+//      private int multiply2(ArrayList<Byte>obj1,ArrayList<Byte>obj2) throws IOException {
+//          int high = readList(obj1);
+//          int low = readList(obj2);
+//            int sums=Math.multiplyExact(high,low);
+//            String format = String.format("%s", sums);
+//            try {
+//                  fs.writeFile(format);
+//            } catch (IOException e) {
+//                  throw new RuntimeException(e);
+//            }
+//            return sums;
+//      }
+//      private int div2(ArrayList<Byte>obj1,ArrayList<Byte>obj2) throws IOException {
+//          int high = readList(obj1);
+//          int low = readList(obj2);
+//            int sums=Math.floorDiv(high,low);
+//            String format = String.format("%s", sums);
+//            try {
+//                  fs.writeFile(format);
+//
+//            } catch (IOException e) {
+//                  throw new RuntimeException(e);
+//            }
+//            return sums;
+//      }
 
-      private int sum2(ArrayList<Byte>obj1,ArrayList<Byte>obj2) throws IOException {
-          int high = readList(obj1);
-          int low = readList(obj2);
-          int sums = Math.addExact(high, low);
-            String format = String.format("%s", sums);
-            try {
-                  fs.writeFile(format);
-            } catch (IOException e) {
-                  throw new RuntimeException(e);
-            }
-            return sums;
-      }
-      private int minus2(ArrayList<Byte>obj1,ArrayList<Byte>obj2) throws IOException {
-          int high = readList(obj1);
-          int low = readList(obj2);
-          int sums = Math.subtractExact(high, low);
-            String format = String.format("%s", sums);
-            try {
-                  fs.writeFile(format);
-            } catch (IOException e) {
-                  throw new RuntimeException(e);
-            }
-            return sums;
-      }
-      private int multiply2(ArrayList<Byte>obj1,ArrayList<Byte>obj2) throws IOException {
-          int high = readList(obj1);
-          int low = readList(obj2);
-            int sums=Math.multiplyExact(high,low);
-            String format = String.format("%s", sums);
-            try {
-                  fs.writeFile(format);
-            } catch (IOException e) {
-                  throw new RuntimeException(e);
-            }
-            return sums;
-      }
-      private int div2(ArrayList<Byte>obj1,ArrayList<Byte>obj2) throws IOException {
-          int high = readList(obj1);
-          int low = readList(obj2);
-            int sums=Math.floorDiv(high,low);
-            String format = String.format("%s", sums);
-            try {
-                  fs.writeFile(format);
-
-            } catch (IOException e) {
-                  throw new RuntimeException(e);
-            }
-            return sums;
-      }
-
-      private int sum3(ArrayList<Byte>obj3) throws IOException {
-            int base = sum2(val0, val1);
-            int next = readList(val2);
-          return base+next;
-      }
       public int Logic() throws IOException {
             val0=new ArrayList<>(20);
             val1=new ArrayList<>(20);
@@ -95,44 +121,47 @@ public class calcLogic {
             sign=new ArrayList<>(20);
             ans=new ArrayList<>(20);
             fs=new files(".panel.txt");
-            int state=0;
             String s = fs.readFile();
-            byte[] bytes = s.getBytes();
+          byte[] bytes = s.getBytes();
 //          +->43, -->45, *->42, /->47, (->40,  )->41
-            for (int i = 0; i < s.length(); i++) {
-                  if(state==1){
-                        val1.add(bytes[i]);
-                  }
-                  if (bytes[i]==43 || bytes[i]== 45 || bytes[i]==42|| bytes[i]==47){
-                        sign.add(bytes[i]);
-                        state=1;
-                  }
-                  if(state==0){
-                        val0.add(bytes[i]);
-                  }///////////////////////
-                  if(bytes[i]==40){// (
-                        state=2;
-                  }
-                  if(bytes[i]==41){// )
-                        state=3;
-                  }////////////////////////
-                  if (state==2){
-                       val2.add(bytes[i]);
-                  }
-                  if (state==3){
-                        val3.add(bytes[i]);
-                  }
-            }
-            // in future add for more signs
-          for (Byte aByte : sign) {
-              return switch (aByte) {
-                  case 43 -> sum2(val0, val1);//+
-                  case 42 -> multiply2(val0, val1);//*
-                  case 47 -> div2(val0, val1);// /
-                  case 45 -> minus2(val0, val1);// -
-                  default -> 0;
-              };
+          int size=0;
+          for (int i = 0; i < s.length(); i++) {
+              size=sign.size();
+              if (bytes[i]==43 || bytes[i]== 45 || bytes[i]==42|| bytes[i]==47||bytes[i]==40|| bytes[i]==41 ){
+                  sign.add(bytes[i]);
+                  size=10;
+              }
+              if (size==0){
+                  val0.add(bytes[i]);
+              }
+              if (size==1){
+                  val1.add(bytes[i]);
+              }
+              if (size==2){
+                  val2.add(bytes[i]);
+              }
+              if (size==3){
+                  val3.add(bytes[i]);
+              }
+
           }
-            return state;
+          calculate();
+//          calculate()
+
+
+
+////           in future add for more signs
+
+//          for (Byte aByte : sign) {
+//              return switch (aByte) {
+//                  case 43 -> sum2(val0, val1);//+
+//                  case 42 -> multiply2(val0, val1);//*
+//                  case 47 -> div2(val0, val1);// /
+//                  case 45 -> minus2(val0, val1);// -
+//                  default -> 0;
+//              };
+//          }
+
+          return 0;
       }
 }
