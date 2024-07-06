@@ -63,7 +63,6 @@ public class pane{
                 y += space;
             } else {x += 80;}
         }
-
         pane.setVisible(true);
         return pane;
         }

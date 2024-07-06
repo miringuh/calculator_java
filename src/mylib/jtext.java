@@ -29,9 +29,7 @@ public class jtext {
         buttValues=new ArrayList<>(25);
         byte[] bytes = val.getBytes();
         int aByte = Integer.parseInt(String.valueOf(bytes[0]));
-/*
-.=46,(-40, )-41, +-43, =-61, *-42, --45, /-47, C-67
-*/
+// .=46,(-40, )-41, +-43, =-61, *-42, --45, /-47, C-67
         switch (aByte){
             case 48 :
             case 49 :
@@ -79,6 +77,7 @@ public class jtext {
         }
         return buttValues;
     }
+
     public Component gettextarea(Component butt) {
         JTextArea area=new JTextArea();
         Border border=new LineBorder(new Color(20,180, 132),2,true);
@@ -89,7 +88,7 @@ public class jtext {
         area.setWrapStyleWord(false);
         area.setBounds(this.xn,this.yn,this.width,this.height);
         area.setLineWrap(false);
-        area.setEditable(true);
+        area.setEditable(false);
         area.setEnabled(true);
         area.setLayout(null);
 
@@ -108,6 +107,7 @@ public class jtext {
                 }
             }
         });
+
         butt.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent mouseEvent) {
@@ -121,7 +121,7 @@ public class jtext {
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
-                }else if(!getbuttonvalue.get(0).equals(15)){
+                }else if(!getbuttonvalue.get(0).equals(15)){ // != =
                     try {
                         s[0] = fd.readFile();
 
@@ -135,12 +135,12 @@ public class jtext {
                     }
                     area.setText(s[0].concat(name1[0]));
                 }
-                if (getbuttonvalue.get(0).equals(15)){// =
+                if (getbuttonvalue.get(0).equals(15)){ // =
                     try {
                         s[0] = fd.readFile();
                         calcLogic logic=new calcLogic();
-                        int logic1 = logic.Logic();
-                        area.setText(String.valueOf(logic1));
+                        String logic1 = logic.Logic();
+                        area.setText("> "+logic1);
 
                     } catch (IOException e) {
                         throw new RuntimeException(e);
@@ -148,17 +148,13 @@ public class jtext {
                 }
             }
             @Override
-            public void mousePressed(MouseEvent mouseEvent) {
-            }
+            public void mousePressed(MouseEvent mouseEvent) {}
             @Override
-            public void mouseReleased(MouseEvent mouseEvent) {
-            }
+            public void mouseReleased(MouseEvent mouseEvent) {}
             @Override
-            public void mouseEntered(MouseEvent mouseEvent) {
-            }
+            public void mouseEntered(MouseEvent mouseEvent) {}
             @Override
-            public void mouseExited(MouseEvent mouseEvent) {
-            }
+            public void mouseExited(MouseEvent mouseEvent) {}
         });
 
         area.setVisible(true);
