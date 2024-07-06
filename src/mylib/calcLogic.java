@@ -191,8 +191,6 @@ public class calcLogic {
               if (size==2){val2.add(bytes[i]);}
               if (size==3){val3.add(bytes[i]);}
           }
-
-
-        return calculate();
+        return "testing";//calculate();
       }
 }
