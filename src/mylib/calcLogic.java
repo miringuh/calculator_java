@@ -1,5 +1,6 @@
 package mylib;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -12,6 +13,50 @@ public class calcLogic {
       ArrayList<Byte>sign;
       ArrayList<Byte>ans;
 
+    private long bodmas(ArrayList<Integer>abuff) throws FileNotFoundException {
+        //       (->40,  )->41, *->42, +->43, -->45, /->47,
+        fs = new files(".panel.txt");
+
+        long num= 0L;
+        for (int i = 0; i < sign.size(); i++) {
+            if (sign.get(i)==47){// div
+                if (num==0){
+                    num=Math.floorDiv(abuff.get(i),abuff.get(i+1));
+                }else{
+                    num=Math.floorDiv(num,abuff.get(i));
+                }
+            }
+        }
+        for (int i = 0; i < sign.size(); i++) {
+            if (sign.get(i)==42){// x
+                if (num==0){
+                    num=Math.multiplyExact(abuff.get(i),abuff.get(i+1));
+                }else{
+                    num=Math.multiplyExact(abuff.get(i),num);
+                }
+            }
+        }
+        for (int i = 0; i < sign.size(); i++) {
+            if (sign.get(i)==43){// +
+                if (num==0){
+                    num= Math.addExact(abuff.get(i),abuff.get(i+1));
+                }else{
+                    num= Math.addExact(abuff.get(i),num);
+                }
+            }
+        }
+        for (int i = 0; i < sign.size(); i++) {
+            if (sign.get(i)==45){// -
+                if (num==0){
+                    num= Math.subtractExact(abuff.get(i),abuff.get(i+1));
+                }else{
+                    num= Math.subtractExact(num,abuff.get(i));
+                }
+            }
+        }
+        fs.writeFile(String.valueOf(num));
+        return num;
+    }
     private int getSign(int val_a,int val_b, Byte val){
 //       (->40,  )->41, *->42, +->43, -->45, /->47,
           int value=0;
@@ -24,9 +69,10 @@ public class calcLogic {
                  return  Math.subtractExact(val_a,val_b);
               case 47:// /
                   return Math.floorDiv(val_a,val_b);
+              default:
+                  return 0;
           }
-          return value;
-      }
+    }
     private int readList(ArrayList<Byte> obj3){
         fs = new files(".panel.txt");
         String s1;
@@ -49,71 +95,79 @@ public class calcLogic {
     }
     private String calculate() throws IOException {
           fs = new files(".panel.txt");
-          int buff0=0;
-          int buff1=0;
-          int buff2=0;
-          int buff3=0;
           ArrayList<Integer> buffer=new ArrayList<>(10);
-          if (!val0.isEmpty()){
-              buff0=readList(val0);
-              buffer.add(buff0);
-          }
-          if (!val1.isEmpty()){
-              buff1=readList(val1);
-              buffer.add(buff1);
-          }
-          if (!val2.isEmpty()){
-              buff2=readList(val2);
-              buffer.add(buff2);
-          }
-          if (!val3.isEmpty()){
-              buff3=readList(val3);
-              buffer.add(buff3);
-          }
+          if (!val0.isEmpty()){buffer.add(readList(val0));}
+          if (!val1.isEmpty()){buffer.add(readList(val1));}
+          if (!val2.isEmpty()){buffer.add(readList(val2));}
+          if (!val3.isEmpty()){buffer.add(readList(val3));}
+//      BUFFER [ O,1,2,3 ]
+        long bodmas = bodmas(buffer);
 
-          if (buff0>=1){buffer.add(buff0);}
-          if (buff1>=1){buffer.add(buff1);}
-          if (buff2>=1){buffer.add(buff2);}
-          if (buff3>=1){buffer.add(buff3);}
-          /////////////////////////////////
-          String s = "";
-          ArrayList<Integer>local;
-          int size = sign.size();
-          switch (size){
-              case 1:
-                  int sign1 = getSign(buffer.get(0), buffer.get(1), sign.get(0));
-                  s = String.valueOf(sign1);
-                  fs.writeFile(s);
-                  return  s;
-
-              case 2:
-                  local=new ArrayList<>(1);
-                  local.add(getSign(buffer.get(0), buffer.get(1), sign.get(0)));
-                  local.add(getSign(local.get(0), buffer.get(2), sign.get(1)));
-                  s = String.valueOf(local.get(0));
-                  fs.writeFile(s);
-                  local.clear();
-                  return  s;
-              case 3:
-                  local=new ArrayList<>(2);
-                  local.add(getSign(buffer.get(0), buffer.get(1), sign.get(0)));//0
-                  local.add(getSign(local.get(0), buffer.get(2), sign.get(1)));//1
-                  s = String.valueOf(getSign(local.get(1), buffer.get(3), sign.get(2)));
-                  fs.writeFile(s);
-                  local.clear();
-                  return  s;
-              case 4:
-                  local=new ArrayList<>(3);
-                  local.add(getSign(buffer.get(0), buffer.get(1), sign.get(0)));
-                  local.add(getSign(local.get(0), buffer.get(2), sign.get(1)));
-                  local.add(getSign(local.get(1), buffer.get(3), sign.get(2)));
-                  s = String.valueOf(getSign(local.get(2),buffer.get(4), sign.get(3)));
-                  fs.writeFile(s);
-                  local.clear();
-                  return  s;
-          }
-          return s;
-      }
+//        String s = "";
+//        ArrayList<Integer>local;
+//          int size = sign.size();
+//          switch (size){
+//              case 0:
+//                  s="Input some data!";
+//                  return s;
+//              case 1:
+//                  int sign1 = getSign(buffer.get(0), buffer.get(1), sign.get(0));
+//                  s = String.valueOf(sign1);
+//                  fs.writeFile(s);
+//                  return  s;
+//
+//              case 2:
+//                  local=new ArrayList<>(1);
+//                  local.add(getSign(buffer.get(0), buffer.get(1), sign.get(0)));
+//                  local.add(getSign(local.get(0), buffer.get(2), sign.get(1)));
+//                  s = String.valueOf(local.get(1));
+//                  fs.writeFile(s);
+//                  local.clear();
+//                  return  s;
+//              case 3:
+//                  local=new ArrayList<>(2);
+//                  local.add(getSign(buffer.get(0), buffer.get(1), sign.get(0)));//0
+//                  local.add(getSign(local.get(0), buffer.get(2), sign.get(1)));//1
+//                  s = String.valueOf(getSign(local.get(1), buffer.get(3), sign.get(2)));
+//                  fs.writeFile(s);
+//                  local.clear();
+//                  return  s;
+//              case 4:
+//                  local=new ArrayList<>(3);
+//                  local.add(getSign(buffer.get(0), buffer.get(1), sign.get(0)));
+//                  local.add(getSign(local.get(0), buffer.get(2), sign.get(1)));
+//                  local.add(getSign(local.get(1), buffer.get(3), sign.get(2)));
+//                  s = String.valueOf(getSign(local.get(2),buffer.get(4), sign.get(3)));
+//                  fs.writeFile(s);
+//                  local.clear();
+//                  return  s;
+//              case 5:
+//                  local=new ArrayList<>(3);
+//                  local.add(getSign(buffer.get(0),buffer.get(1), sign.get(0)));
+//                  local.add(getSign(local.get(0), buffer.get(2), sign.get(1)));
+//                  local.add(getSign(local.get(1), buffer.get(3), sign.get(2)));
+//                  local.add(getSign(local.get(2), buffer.get(4), sign.get(3)));
+//                  s = String.valueOf(getSign(local.get(3),buffer.get(5), sign.get(4)));
+//                  fs.writeFile(s);
+//                  local.clear();
+//                  return s;
+//              case 6:
+//                  local=new ArrayList<>(3);
+//                  local.add(getSign(buffer.get(0), buffer.get(1), sign.get(0)));
+//                  local.add(getSign(local.get(0), buffer.get(2), sign.get(1)));
+//                  local.add(getSign(local.get(1), buffer.get(3), sign.get(2)));
+//                  local.add(getSign(local.get(2), buffer.get(4), sign.get(3)));
+//                  local.add(getSign(local.get(3), buffer.get(5), sign.get(4)));
+//                  s = String.valueOf(getSign(local.get(4),buffer.get(6), sign.get(5)));
+//                  fs.writeFile(s);
+//                  local.clear();
+//                  return s;
+//              default:
+//                  s="Overflow:max 6 arithmetics";
+//                  return s;
+//          }
+        return String.valueOf(bodmas);
+    }
     public String Logic() throws IOException {
           val0=new ArrayList<>(20);
           val1=new ArrayList<>(20);
@@ -137,6 +191,8 @@ public class calcLogic {
               if (size==2){val2.add(bytes[i]);}
               if (size==3){val3.add(bytes[i]);}
           }
+
+
         return calculate();
       }
 }

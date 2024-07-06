@@ -140,7 +140,7 @@ public class jtext {
                         s[0] = fd.readFile();
                         calcLogic logic=new calcLogic();
                         String logic1 = logic.Logic();
-                        area.setText("> "+logic1);
+                        area.setText(">"+logic1);
 
                     } catch (IOException e) {
                         throw new RuntimeException(e);

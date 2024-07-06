@@ -26,6 +26,21 @@ public class jmenu {
     public void getComp(Component comp){
         this.mycomp=comp;
     }
+    public Component getAmenu(String text){
+        menu = new JMenu();
+        menu.setBounds(this.xn, this.yn, (text.length()*12), this.height);
+        menu.setName(this.name);
+        menu.setText(text);
+        menu.setFocusable(true);
+        menu.setFont(new Font(Font.SANS_SERIF,Font.BOLD,14));
+        menu.setBackground(new Color(10,10,200));
+        menu.setLayout(null);
+        menu.setFocusPainted(true);
+        menu.setSelected(false);
+        menu.setEnabled(true);
+        menu.setVisible(true);
+        return menu;
+    }
     public Component getjmenu(String fd, ArrayList<String> file, ArrayList<String> view, ArrayList<String> edit, ArrayList<String> help) {
         menu = new JMenu();
         menu.setBounds(this.xn, this.yn, this.width, this.height);
