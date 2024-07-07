@@ -26,10 +26,10 @@ public class jtext {
         this.name=name;
     }
     private ArrayList<Integer> getbuttonvalue(String val){
-        buttValues=new ArrayList<>(25);
+        buttValues=new ArrayList<>(30);
         byte[] bytes = val.getBytes();
         int aByte = Integer.parseInt(String.valueOf(bytes[0]));
-// .=46,(-40, )-41, +-43, =-61, *-42, --45, /-47, C-67
+// .=46,(-40, )-41, +-43, =-61, *-42, --45, /-47, C-67 ^-97 %-37
         switch (aByte){
             case 48 :
             case 49 :
@@ -62,17 +62,14 @@ public class jtext {
             case 43://+
                 buttValues.add(16);
                 break;
-            case 40://(
-                buttValues.add(10);
-                break;
-            case 41://)
-                buttValues.add(11);
-                break;
             case 94://^
-                buttValues.add(12);
+                buttValues.add(10);
                 break;
             case 42://*
                 buttValues.add(13);
+                break;
+            case 37://%
+                buttValues.add(11);
                 break;
         }
         return buttValues;
@@ -108,12 +105,12 @@ public class jtext {
             }
         });
 
+
         butt.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent mouseEvent) {
                 name1[0] = butt.getName();
                 ArrayList<Integer> getbuttonvalue = getbuttonvalue(name1[0]);
-
                 if (getbuttonvalue.get(0).equals(19)){// clr
                     try {
                         fd.flushFile();
@@ -121,18 +118,15 @@ public class jtext {
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
-                }else if(!getbuttonvalue.get(0).equals(15)){ // != =
+                }else if(!getbuttonvalue.get(0).equals(15)){ // not =
                     try {
                         s[0] = fd.readFile();
-
                     } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
+                        throw new RuntimeException(e);}
                     try {
                         fd.writeFile(s[0].concat(name1[0]));
                     } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
+                        throw new RuntimeException(e);}
                     area.setText(s[0].concat(name1[0]));
                 }
                 if (getbuttonvalue.get(0).equals(15)){ // =
@@ -140,7 +134,7 @@ public class jtext {
                         s[0] = fd.readFile();
                         calcLogic logic=new calcLogic();
                         String logic1 = logic.Logic();
-                        area.setText(">"+logic1);
+                        area.setText(logic1);
 
                     } catch (IOException e) {
                         throw new RuntimeException(e);
@@ -156,6 +150,7 @@ public class jtext {
             @Override
             public void mouseExited(MouseEvent mouseEvent) {}
         });
+
 
         area.setVisible(true);
         return area;
