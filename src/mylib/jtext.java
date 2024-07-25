@@ -112,7 +112,6 @@ public class jtext {
                 ArrayList<Integer> getbuttonvalue = getbuttonvalue(name1[0]);
                 if (getbuttonvalue.get(0).equals(19)){// clr
                     try {
-                        area.setEditable(false);
                         fd.flushFile();
                         area.setText(" ");
                     } catch (IOException e) {
@@ -139,14 +138,18 @@ public class jtext {
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
-                }
+                }// =
             }
             @Override
-            public void mousePressed(MouseEvent mouseEvent) {}
+            public void mousePressed(MouseEvent mouseEvent) {
+                area.setEditable(false);
+            }
             @Override
             public void mouseReleased(MouseEvent mouseEvent) {}
             @Override
-            public void mouseEntered(MouseEvent mouseEvent) {}
+            public void mouseEntered(MouseEvent mouseEvent) {
+                area.setEditable(false);
+            }
             @Override
             public void mouseExited(MouseEvent mouseEvent) {}
         });

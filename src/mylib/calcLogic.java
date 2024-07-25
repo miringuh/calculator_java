@@ -81,11 +81,9 @@ public class calcLogic {
             }
         }// %
         float val=0;
-        if (dot.size()==0){val=num;}
+        if (dot.isEmpty()){val=num;}
         if (dot.size()>=1){val=(float) num /10;}
-        if (dot.size()>=2){val= (float) num /10;};
-
-
+        if (dot.size()>=2){val= (float) num /100;};
         fs.writeFile(String.valueOf(val));
         return val;
     }
