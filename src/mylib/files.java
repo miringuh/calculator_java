@@ -7,10 +7,7 @@ import java.io.IOException;
 
 public class files {
     String Filename;
-    public files(String filename){
-        this.Filename=filename;
-    }
-
+    public files(String filename){this.Filename=filename;}
     public String readFile()throws FileNotFoundException {
         FileInputStream reads=new FileInputStream(this.Filename);
         try{

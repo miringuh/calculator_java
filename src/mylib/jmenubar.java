@@ -76,7 +76,6 @@ public class jmenubar {
             menu = new jmenu(0, 14, 40, 30, s);
             menu.getComp(mycomp);
             Component getjmenu = menu.getjmenu(s, file, view, edit, help);
-
             jbar.add(getjmenu);
             cnt += fd_size;
         }

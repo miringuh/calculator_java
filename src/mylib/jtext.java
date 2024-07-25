@@ -105,7 +105,6 @@ public class jtext {
             }
         });
 
-
         butt.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent mouseEvent) {
@@ -113,6 +112,7 @@ public class jtext {
                 ArrayList<Integer> getbuttonvalue = getbuttonvalue(name1[0]);
                 if (getbuttonvalue.get(0).equals(19)){// clr
                     try {
+                        area.setEditable(false);
                         fd.flushFile();
                         area.setText(" ");
                     } catch (IOException e) {
@@ -150,7 +150,6 @@ public class jtext {
             @Override
             public void mouseExited(MouseEvent mouseEvent) {}
         });
-
 
         area.setVisible(true);
         return area;
