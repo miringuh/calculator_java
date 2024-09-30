@@ -30,9 +30,7 @@ public class jbutton{
             button.addMouseListener(new MouseListener() {
                 @Override
                 public void mouseClicked(MouseEvent mouseEvent) {
-
                 }
-
                 @Override
                 public void mousePressed(MouseEvent mouseEvent) {}
                 @Override

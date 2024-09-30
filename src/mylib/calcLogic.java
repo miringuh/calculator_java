@@ -80,16 +80,15 @@ public class calcLogic {
                 num= Math.floorDiv(upper,100);
             }
         }// %
-        float val=0;
-        if (dot.isEmpty()){val=num;}
-        if (dot.size()>=1){val=(float) num /10;}
-        if (dot.size()>=2){val= (float) num /100;};
+
+        int val=num;
+        if (abuff_dot.size()==0){ val=num;}
         fs.writeFile(String.valueOf(val));
         return val;
     }
 
     private int readList(ArrayList<Byte> arr){
-        fs = new files(".panel.txt");
+        fs = new files("panel.txt");
         String s1;
         int val_0 = 0;
         int buff = 0;
@@ -110,9 +109,10 @@ public class calcLogic {
     }
 // ^=94  %=37 +=43 *=42 -=45 /=47 (->40  )->41 .=46
     private String calculate() throws IOException {
-        fs = new files(".panel.txt");
+        fs = new files("panel.txt");
         ArrayList<Integer> buffer=new ArrayList<>(10);
         ArrayList<Integer> buffer_dot=new ArrayList<>(10);
+
         if (!val0.isEmpty()){buffer.add(readList(val0));}
         if (!val1.isEmpty()){buffer.add(readList(val1));}
         if (!val2.isEmpty()){buffer.add(readList(val2));}
@@ -121,11 +121,12 @@ public class calcLogic {
         if (!val5.isEmpty()){buffer.add(readList(val5));}
         for (Byte aByte : dot) {
             buffer_dot.add(Integer.valueOf(aByte));
+//            System.out.println(dot.get(aByte));
         }
-        float bodmas =(float) bodmas(buffer,buffer_dot);
-
+        float bodmas =bodmas(buffer,buffer_dot);
         return String.valueOf(bodmas);
     }
+
 
     public String Logic() throws IOException {
         val0=new ArrayList<>(20);
@@ -136,7 +137,7 @@ public class calcLogic {
         val5=new ArrayList<>(20);
         sign=new ArrayList<>(20);
         dot=new ArrayList<>(10);
-        fs=new files(".panel.txt");
+        fs=new files("panel.txt");
         String s = fs.readFile();
         byte[] bytes = s.getBytes();
           int size;
@@ -152,7 +153,6 @@ public class calcLogic {
                   dot.add((byte) i);
                   size=10;
               }// dot
-
               if (size==0){val0.add(bytes[i]);}
               if (size==1){val1.add(bytes[i]);}
               if (size==2){val2.add(bytes[i]);}

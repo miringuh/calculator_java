@@ -22,7 +22,6 @@ public class jpanel {
         this.height=height;
         this.name=name;
     }
-
     public  JPanel getpanelComp(Component apane) {
         jp = new JPanel();
         jp.setBounds(this.xn, this.yn, this.width, this.height);
@@ -33,7 +32,6 @@ public class jpanel {
         Border border = new LineBorder(new Color(13, 55, 216, 103), 5, true);
         jp.setBorder(border);
         jp.setEnabled(true);
-
         comp = new ArrayList<>(20);
         comp.add("7");
         comp.add("8");
@@ -55,8 +53,6 @@ public class jpanel {
         comp.add(")");//41
         comp.add("^");//94
         comp.add("*");//42
-        int x = 10;
-        int y = 140;
         jp.setVisible(true);
         return jp;
     }

@@ -29,7 +29,7 @@ public class pane{
     public Component gettextpane() {
         pane = new JPanel();
 
-        jmenubar bar=new jmenubar(10,10,(this.width-20),40,"Bar");
+        jmenubar bar=new jmenubar(10,10,(this.width-20),25,"Bar");
         bar.getComp(mycomp);
         Component getjbar = bar.getjbar();
         pane.add(getjbar);

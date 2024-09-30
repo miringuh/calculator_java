@@ -72,6 +72,7 @@ public class jmenubar {
         jbar.setEnabled(true);
         cnt=0;
         int fd_size = fd.size() * 12;
+
         for (String s : fd) {
             menu = new jmenu(0, 14, 40, 30, s);
             menu.getComp(mycomp);

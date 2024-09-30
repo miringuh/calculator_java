@@ -74,7 +74,6 @@ public class jtext {
         }
         return buttValues;
     }
-
     public Component gettextarea(Component butt) {
         JTextArea area=new JTextArea();
         Border border=new LineBorder(new Color(20,180, 132),2,true);
@@ -88,11 +87,9 @@ public class jtext {
         area.setEditable(false);
         area.setEnabled(true);
         area.setLayout(null);
-
-        files fd=new files(".panel.txt");
+        files fd=new files("panel.txt");
         final String[] s = new String[1];
         final String[] name1 = new String[1];
-
         area.addPropertyChangeListener(new PropertyChangeListener() {
             @Override
             public void propertyChange(PropertyChangeEvent propertyChangeEvent) {
@@ -104,7 +101,6 @@ public class jtext {
                 }
             }
         });
-
         butt.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent mouseEvent) {
@@ -114,10 +110,24 @@ public class jtext {
                     try {
                         fd.flushFile();
                         area.setText(" ");
+
+//                        String s1 = fd.readFile();
+//                        StringBuffer buffer=new StringBuffer(s1);
+//                        int length = buffer.length();
+//                        buffer.deleteCharAt(length-1);
+//
+//                        if (buffer.length()>=0) {
+//                            fd.writeFile(buffer.toString());
+//                            area.setText(buffer.toString());
+//                        }else if (buffer.isEmpty()){
+//                            area.setText(" ");
+//                            fd.flushFile();
+//                        }
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
-                }else if(!getbuttonvalue.get(0).equals(15)){ // not =
+                }
+                else if(!(getbuttonvalue.get(0).equals(15))){ // not =
                     try {
                         s[0] = fd.readFile();
                     } catch (IOException e) {
@@ -127,29 +137,24 @@ public class jtext {
                     } catch (IOException e) {
                         throw new RuntimeException(e);}
                     area.setText(s[0].concat(name1[0]));
-                }
+                }// any
                 if (getbuttonvalue.get(0).equals(15)){ // =
                     try {
                         s[0] = fd.readFile();
                         calcLogic logic=new calcLogic();
                         String logic1 = logic.Logic();
                         area.setText(logic1);
-
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
                 }// =
             }
             @Override
-            public void mousePressed(MouseEvent mouseEvent) {
-                area.setEditable(false);
-            }
+            public void mousePressed(MouseEvent mouseEvent) {}
             @Override
             public void mouseReleased(MouseEvent mouseEvent) {}
             @Override
-            public void mouseEntered(MouseEvent mouseEvent) {
-                area.setEditable(false);
-            }
+            public void mouseEntered(MouseEvent mouseEvent) {}
             @Override
             public void mouseExited(MouseEvent mouseEvent) {}
         });
